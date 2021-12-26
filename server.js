@@ -18,15 +18,24 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/src/views/home.html'))
 })
 
-app.post('/speak', function(req, res) {
-    speak(req.body.message)
+app.use('/speak', function(req, res) {
+    if(req.body.message) {
+        speak(req.body.message)
+    } else {
+        speak('You must type characters to speak!')
+    }
+
     res.sendFile(path.join(__dirname, '/src/views/home.html'))
 })
 
 app.listen(PORT, () => {
+    // This is where the app is starting
     console.log(`\n
     Server listening on port ${PORT}
     Opening browser to: ${BROWSER_URL}
     Press "control" + "c" to quit.\n`)
+    // Add a welcome message
+    speak('Hi Rowan!')
+    // Open website
     setTimeout(() => open(BROWSER_URL), 2000)
 })
