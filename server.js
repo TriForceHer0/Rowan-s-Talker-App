@@ -35,7 +35,7 @@ app.listen(PORT, () => {
     Opening browser to: ${BROWSER_URL}
     Press "control" + "c" to quit.\n`)
     // Add a welcome message
-    speak('Welcome Rowan,what would you like to say today?')
+    speak('Welcome Rowan, lets get talking!')
     // Open website
     setTimeout(() => open(BROWSER_URL), 2000)
 })
