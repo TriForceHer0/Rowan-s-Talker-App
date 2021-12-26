@@ -3,8 +3,10 @@ const app = express()
 const path = require('path')
 const open = require('open')
 const { speak } = require('./src/speak')
+const { getRandomGreeting } = require('./src/welcomeMessages')
 const PORT = process.env.PORT || 8080
 const BROWSER_URL = `http://localhost:${PORT}`
+const WELCOME_MESSAGE = getRandomGreeting()
 
 function loggerMiddleware(req, res, next) {
     console.log(`Incoming request to ${req.path}`)
@@ -33,9 +35,10 @@ app.listen(PORT, () => {
     console.log(`\n
     Server listening on port ${PORT}
     Opening browser to: ${BROWSER_URL}
-    Press "control" + "c" to quit.\n`)
+    Press "control" + "c" to quit.
+    ${WELCOME_MESSAGE}\n`)
     // Add a welcome message
-    speak('Welcome Rowan, lets get talking!')
+    speak(WELCOME_MESSAGE)
     // Open website
     setTimeout(() => open(BROWSER_URL), 2000)
 })
